@@ -27,12 +27,12 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="duracaoProjetoEmMeses"]').type('6'); //Preenche o campo "Duração do Projeto em Meses com o valor 6"
     cy.get('[data-cy="pesquisadorSubmeterVariasPropostas"]').check(); //Marca a opção "Pesquisador pode submeter várias propostas"
     cy.get('[data-cy="termo-de-aceite"]').click(); 
-    //cy.get('.ck-editor__editable[role="textbox"]').should('be.visible').click().focus().realType('Termo de Aceite Edital Medio - Grupo 8');
+    cy.get('.ck-editor__editable[role="textbox"]').should('be.visible').click().focus().realType('Termo de Aceite Edital Completo - Grupo 8');
 
 
-
+    
     cy.get('[data-cy="texto-do-edital"]').click();
-    //cy.get('[data-cy="texto"]').should('be.visible').click().focus().realType('Texto do Edital (Medio) - Grupo 8'); 
+    cy.get('[data-cy="texto"]').should('be.visible').click().focus().realType('Texto do Edital (Completo) - Grupo 8'); 
     cy.get('[data-cy="abrangencia"]').click();
     cy.get('[data-cy="estado-todos"]').click();
 
@@ -224,6 +224,62 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMaximo"]').type('80000');
     cy.get('[data-cy="faixaFinanciamentoUnsaved.observacao"]').type('Observação da Faixa 5');
     cy.get('[data-cy="faixaFinanciamento-confirmar"]').click();
+    
+    //Documentos
+    cy.get('[data-cy="documentos"]').click(); 
+
+    cy.get('[data-cy="documentos-da-proposta"]').click();
+    //1
+    cy.get('[data-cy="documentoPropostaEdital-adicionar"]').click();
+    cy.get('.MuiAccordionSummary-root').click(); 
+    cy.get('[data-cy="documentoPropostaEdital.0.nome"]').type('Documento 1');
+    cy.get('[data-cy="documentoPropostaEdital.0.formatoArquivo"]').click();
+    cy.get('[data-cy="doc"]').click(); 
+    cy.get('[data-cy="documentoPropostaEdital.0.tamanhoArquivo"]').type('9'); 
+    cy.get('[data-cy="documentoPropostaEdital.0.descricao"]').type('Descrição do Documento 1');
+    cy.wait(300);
+    //2
+    cy.get('[data-cy="documentoPropostaEdital-adicionar"]').click();
+    cy.get('[data-cy="documentoPropostaEdital--expandable-item"]').click(); 
+    cy.get('[data-cy="documentoPropostaEdital.1.nome"]').type('Documento 2');
+    cy.get('[data-cy="documentoPropostaEdital.1.formatoArquivo"]').click();
+    cy.get('[data-cy="pdf"]').click(); 
+    cy.get('[data-cy="documentoPropostaEdital.1.tamanhoArquivo"]').type('8'); 
+    cy.get('[data-cy="documentoPropostaEdital.1.descricao"]').type('Descrição do Documento 2');
+    cy.wait(300);
+
+    //Documentos Pessoais
+    cy.get('[data-cy="documentos-pessoais"]').click();
+    //Documento Pessoal 1
+    cy.get('[data-cy="documentoPessoalEdital-adicionar"]').click();
+    cy.get('[data-cy="documentoPessoalEdital.0.documentoPessoalId"]').click();
+    cy.get('[data-cy="rg"]').click(); 
+    cy.get('[data-cy="documentoPessoalEdital.0.obrigatorio"]').click(); //obrigatório o rg
+    
+    //Documento Pessoal 2
+    cy.get('[data-cy="documentoPessoalEdital-adicionar"]').click();
+    cy.get('[data-cy="documentoPessoalEdital.1.documentoPessoalId"]').click();
+    cy.get('[data-cy="cpf"]').click();
+    cy.get('[data-cy="documentoPessoalEdital.1.obrigatorio"]').click(); //obrigatório o cpf
+
+    //Documento Pessoal 3
+    cy.get('[data-cy="documentoPessoalEdital-adicionar"]').click();
+    cy.get('[data-cy="documentoPessoalEdital.2.documentoPessoalId"]').click();
+    cy.get('[data-cy="comprovante-de-r"]').click();
+    cy.get('[data-cy="documentoPessoalEdital.2.obrigatorio"]').click(); //obrigatório comprovante de residência
+
+    //Documento Pessoal 4
+    cy.get('[data-cy="documentoPessoalEdital-adicionar"]').click();
+    cy.get('[data-cy="documentoPessoalEdital.3.documentoPessoalId"]').click();
+    cy.get('[data-cy="titulo-de-eleito"]').click(); //não obrigatório o título de eleitor
+
+    //Documento Pessoal 5
+    cy.get('[data-cy="documentoPessoalEdital-adicionar"]').click();
+    cy.get('[data-cy="documentoPessoalEdital.4.documentoPessoalId"]').click();
+    cy.get('[data-cy="passaporte"]').click(); //não obrigatório o passaporte
+    
+    
+
 
     //Descrição do Projeto
 
@@ -237,10 +293,10 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="pergunta-adicionar"]').click();
 
     //descriçao 2
-    cy.get('[data-cy="perguntaDescId"]').click();
-    cy.get('[data-cy="experiencia-do-c"]').click();
-    cy.wait(300);
-    cy.get('[data-cy="pergunta-adicionar"]').click();
+    //cy.get('[data-cy="perguntaDescId"]').click();
+    //cy.get('[data-cy="experiencia-do-c"]').click();
+    //cy.wait(300);
+    //cy.get('[data-cy="pergunta-adicionar"]').click();
   
     //descriçao 3
     cy.get('[data-cy="perguntaDescId"]').click();
@@ -267,7 +323,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="pergunta-adicionar"]').click();
     
     
-    cy.get('[data-cy="perguntas"]').click();
+    //Indicadores de Produção
     cy.get('[data-cy="indicadores-de-producao"]').click();
 
     cy.get('[data-cy="add-button"]').click();
@@ -285,9 +341,103 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="producao-tecnica"]').click();
     cy.get('[data-cy="indicadorProducao-confirmar"]').click();
 
+    //Bolsas
+    cy.get('[data-cy="bolsas-do-edital"]').click();
+    cy.get('[data-cy="bolsas"').click();
+    
+    //Bolsa1
+    cy.get('[data-cy="add-button"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.modalidadeBolsaId"]').click();
+    cy.get('[data-cy="at"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.nivelBolsaId"]').click();
+    cy.get('[data-cy="nm-r-560-00"]').click(); 
+    cy.wait(300);
+    cy.get('[data-cy="bolsaEdital-confirmar"]').click();
 
-    cy.get('[data-cy="menu-salvar"]').check(); //Clica no botão "Salvar" para salvar as informações do Edital
-    cy.get('[data-cy="menu-finalizar"]').check(); //Clica no botão "Finalizar" para salvar e sair da área de adição do Edital
+    //Bolsa2
+    cy.get('[data-cy="add-button"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.modalidadeBolsaId"]').click();
+    cy.get('[data-cy="at"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.nivelBolsaId"]').click();
+    cy.get('[data-cy="ns-r-770-00"]').click(); 
+    cy.wait(300);
+    cy.get('[data-cy="bolsaEdital-confirmar"]').click();
+
+    //Bolsa3
+    cy.get('[data-cy="add-button"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.modalidadeBolsaId"]').click();
+    cy.get('[data-cy="dct"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.nivelBolsaId"]').click();
+    cy.get('[data-cy="i-0-h-r-4-484-00"]').click(); 
+    cy.wait(300);
+    cy.get('[data-cy="bolsaEdital-confirmar"]').click();
+
+    //Bolsa4
+    cy.get('[data-cy="add-button"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.modalidadeBolsaId"]').click();
+    cy.get('[data-cy="dct"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.nivelBolsaId"]').click();
+    cy.get('[data-cy="ii-0-h-r-5-220-0"]').click(); 
+    cy.wait(300);
+    cy.get('[data-cy="bolsaEdital-confirmar"]').click();
+
+    //Bolsa5
+    cy.get('[data-cy="add-button"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.modalidadeBolsaId"]').click();
+    cy.get('[data-cy="dti-cn-pq"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.nivelBolsaId"]').click();
+    cy.get('[data-cy="a-0-h-r-880-00"]').click(); 
+    cy.wait(300);
+    cy.get('[data-cy="bolsaEdital-confirmar"]').click();
+
+    //Bolsa6
+    cy.get('[data-cy="add-button"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.modalidadeBolsaId"]').click();
+    cy.get('[data-cy="dti-cn-pq"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.nivelBolsaId"]').click();
+    cy.get('[data-cy="c-0-h-r-240-00"]').click(); 
+    cy.wait(300);
+    cy.get('[data-cy="bolsaEdital-confirmar"]').click();
+
+    //Bolsa7
+    cy.get('[data-cy="add-button"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.modalidadeBolsaId"]').click();
+    cy.get('[data-cy="exp"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.nivelBolsaId"]').click();
+    cy.get('[data-cy="a-r-5-200-00"]').click(); 
+    cy.wait(300);
+    cy.get('[data-cy="bolsaEdital-confirmar"]').click();
+
+    //Bolsa8
+    cy.get('[data-cy="add-button"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.modalidadeBolsaId"]').click();
+    cy.get('[data-cy="exp"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.nivelBolsaId"]').click();
+    cy.get('[data-cy="c-r-1-430-00"]').click(); 
+    cy.wait(300);
+    cy.get('[data-cy="bolsaEdital-confirmar"]').click();
+
+    //Bolsa9
+    cy.get('[data-cy="add-button"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.modalidadeBolsaId"]').click();
+    cy.get('[data-cy="set"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.nivelBolsaId"]').click();
+    cy.get('[data-cy="a-0-h-1-180-00"]').click(); 
+    cy.wait(300);
+    cy.get('[data-cy="bolsaEdital-confirmar"]').click();
+
+    //Bolsa10
+    cy.get('[data-cy="add-button"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.modalidadeBolsaId"]').click();
+    cy.get('[data-cy="set"]').click();
+    cy.get('[data-cy="bolsaEditalUnsaved.nivelBolsaId"]').click();
+    cy.get('[data-cy="b-0-h-980-00"]').click(); 
+    cy.wait(300);
+    cy.get('[data-cy="bolsaEdital-confirmar"]').click();
+    
+    //Final
+    cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações do Edital
+    cy.get('[data-cy="menu-finalizar"]').click(); //Clica no botão "Finalizar" para salvar e sair da área de adição do Edital
 
     //Resultado esperado: O Edital deve ser salvo com sucesso e o usuário deve ser redirecionado para a página de Editais.
   });
