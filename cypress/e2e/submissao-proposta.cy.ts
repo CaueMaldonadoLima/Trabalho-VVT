@@ -41,6 +41,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="areaDeConhecimento.0.especialidadeId"]').click();
     cy.get('[data-cy="computabilidade"]').click();
     cy.get('[data-cy="next-button"]').click();
+
     //Abrangencia//
     cy.get('[data-cy="abrangencia-adicionar"]').click();
     cy.get('[data-cy="abrangencia.0.estadoId"]').click();
@@ -48,6 +49,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="abrangencia.0.abrangenciaMunicipio"]').click();
     cy.get('[data-cy="adamantina"]').click();
     cy.get('[data-cy="next-button"]').click();
+
     //Coordenação - Dados pessoais
     cy.get('[data-cy="criadoPor.nome"]').type('Teste');
     cy.get('[data-cy="criadoPor.racaCorId"]').click();
@@ -58,6 +60,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="criadoPor.dataNascimento"]').click().type('14052004');
     cy.get('[data-cy="criadoPor.documento"]').type('05242199156');
     cy.get('[data-cy="next-button"]').click();
+
     //Coordenação - Endereço
     cy.get('[data-cy="criadoPor.endereco.cep"]').type('17800000');
     cy.get('[data-cy="criadoPor.endereco.bairro"]').type('centro');
@@ -68,17 +71,18 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="criadoPor.endereco.municipio"]').click();
     cy.get('[data-cy="adamantina"]').click();
     cy.get('[data-cy="next-button"]').click();
+
     //Coordenação Dados acdemicos
     cy.get('[data-cy="criadoPor.instituicaoId"]').click();
     cy.get('[data-cy="ufms-universidad"]').click();
     cy.get('[data-cy="criadoPor.sugerirUnidade"]').click();
-    cy.wait(300);
-
+    cy.wait(300); 
     cy.get('[data-cy="criadoPor.sugerirUnidade"]').click();
     cy.get('[data-cy="criadoPor.unidadeId"]').click();
     cy.get('[data-cy="facom-faculdade"]').click();
     cy.get('[data-cy="criadoPor.nivelAcademicoId"]').click();
     cy.get('[data-cy="ensino-superior"]').click();
+
     //Area de conhecimento
     cy.get('[data-cy="criadoPor.areaDeConhecimento-adicionar"]').click();
     cy.get('.MuiAccordionSummary-content > :nth-child(1)').click();
@@ -91,5 +95,39 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="criadoPor.areaDeConhecimento.0.especialidadeId"]').click();
     cy.get('[data-cy="hardware"]').click();
     cy.get('[data-cy="next-button"]').click();
+
+    //pula dados profissionais
+    cy.get('[data-cy="next-button"]').click();
+
+    //Apresentação - Membros
+    cy.get('[data-cy="nome-do-pesquisa"]').click();
+    cy.get('#search-select-multiple-option-1').click();
+    cy.get('.MuiButton-root > .MuiStack-root').click(); //botao de aceitar
+    cy.get('[data-cy="nome-do-pesquisa"]').click();
+    cy.get('#search-select-multiple-option-0').click();
+    cy.get('.MuiButton-root > .MuiStack-root').click(); //botao de aceitar
+    cy.get('#mui-131').click();
+    cy.get('#mui-131-option-0').click();
+    cy.get('#mui-133').click();
+    cy.get('#mui-133-option-7').click();
+    cy.get('[data-cy="next-button"]').click();
+
+    //Apresentação - Atividades
+    cy.get('[data-cy="propostaAtividade-adicionar"]').click();
+    cy.get('[data-cy="propostaAtividade.0.titulo"]').type('teste');
+    cy.get('[data-cy="propostaAtividade.0.mesInicio"]').click();
+    cy.get('#mui-225-option-0').click();
+    cy.get('[data-cy="propostaAtividade.0.duracao"]').click();
+    cy.get('#mui-227-option-0').click();
+    cy.get('[data-cy="propostaAtividade.0.cargaHorariaSemanal"]').click();
+    cy.get('[data-cy="1-hora"]').click();
+    cy.get('[data-cy="propostaAtividade.0.membroResponsavelId"]').click();
+    cy.get('#mui-231-option-0').click();
+    cy.get('[data-cy="next-button"]').click();
+    
+    //Termos
+    cy.get('[data-cy="termoDeAceiteAceito"]').click();
+    cy.get('.ex40wuf1').click();
+
   }); 
 });
