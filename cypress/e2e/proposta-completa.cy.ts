@@ -109,6 +109,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-testid="AddIcon"]').click(); //botao de aceitar
 
     cy.get('input[role="combobox"]').eq(1).click();
+    cy.wait(300);
     cy.contains("li", "Parceir").click();
     cy.get('input[role="combobox"]').eq(2).click();
     cy.wait(300);
