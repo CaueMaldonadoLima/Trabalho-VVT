@@ -1,14 +1,14 @@
-describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', () => {
+describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", () => {
   beforeEach(() => {
     // Gancho em nível raíz
     // executa antes de realizar cada teste(it)
     cy.typelogin(
-      'https://novo-sig.ledes.net',// [URL do sistema]
-      'grupo8_pesq@sig.com', // [E-mail do usuário]
-      'Grupo8@sig', // [Senha do usuário]
+      "https://novo-sig.ledes.net", // [URL do sistema]
+      "grupo8_pesq@sig.com", // [E-mail do usuário]
+      "Grupo8@sig" // [Senha do usuário]
     ); //Acessa a página de login usando as credenciais do usuário e senha.
   });
-  it('Realiza login no sistema e submete uma proposta', () => {
+  it("Realiza login no sistema e submete uma proposta", () => {
     cy.get('[data-cy="breadcrumb-home"]').click(); //Clica no botão "Home" para retornar à página anterior
     cy.get('[data-cy="editais-ver-mais"]').click(); //Clica no botão "Ver Mais" para acessar a página de Editais
 
@@ -17,126 +17,129 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.wait(300); //Aguarda 300ms para garantir que a página foi carregada completamente
     cy.get('[data-cy="criar-proposta"]').click(); //Clica no botão "Criar Proposta" para iniciar o processo de criação de uma nova proposta
     cy.get('[data-cy="tituloDoProjeto"]').type(
-        'Submissão de Proposta Edital Completo - teste', //Preenche o campo "Título do Projeto" com o valor "Submissão de Proposta de Teste"
-        { delay: 0 },
-    )
-    
-    //Atividade 3 - Faça a continuidade do teste, preenchendo os campos obrigatórios da proposta.
-    cy.get('[data-cy="instituicaoExecutoraId"]').click();
-    cy.get('[data-cy="ufms-universidad"]').eq(1).click();
-    cy.wait(300); //Aguarda 300ms para garantir que a página foi carregada completamente
-    cy.get('[data-cy="unidadeExecutoraId"]').click();
-    cy.get('[data-cy="facom-faculdade"]').eq(0).click();
-    cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
+      "Submissão de Proposta Edital Completo - teste", //Preenche o campo "Título do Projeto" com o valor "Submissão de Proposta de Teste"
+      { delay: 0 }
+    );
+
     cy.wait(300);
-    cy.get('.MuiGrid-grid-xs-7 > .MuiGrid-container').eq(1).click();
+    cy.get('[data-cy="informacoes-complementares"]').click();
     cy.wait(300);
-    cy.get('[data-cy="areaDeConhecimento.1.grandeAreaId"]').click();
-    cy.get('[data-cy="ciencias-exatas"]').eq(0).click();
-    cy.wait(300);
-    cy.get('[data-cy="areaDeConhecimento.1.areaId"]').click();
-    cy.get('[data-cy="ciencia-da-compu"]').click();
-    cy.wait(300);
-    cy.get('[data-cy="areaDeConhecimento.1.subAreaId"]').click();
-    cy.get('[data-cy="teoria-da-comput"]').eq(0).click();
-    cy.get('[data-cy="areaDeConhecimento.1.especialidadeId"]').click();
-    cy.get('[data-cy="computabilidade"]').click();
-    cy.get('[data-cy="next-button"]').click();
-    
+
+    cy.get(
+      '[data-cy="formularioPropostaInformacaoComplementar.pergunta-27"]'
+    ).type("Descrição do projeto de teste para proposta completa", {
+      delay: 0,
+    });
+    cy.get(
+      '[data-cy="formularioPropostaInformacaoComplementar.pergunta-23-item-ods02-erradicar"]'
+    ).click();
+    cy.get(
+      '[data-cy="formularioPropostaInformacaoComplementar.pergunta-24-item-media-faturament"]'
+    ).click();
+    cy.get(
+      '[data-cy="formularioPropostaInformacaoComplementar.pergunta-25-item-saude-humana-e-o"]'
+    ).click();
+    cy.get(
+      '[data-cy="formularioPropostaInformacaoComplementar.pergunta-26"]'
+    ).type("29092025", { delay: 0 });
+
     //Abrangencia//
     cy.get('[data-cy="abrangencia"]').click();
+    cy.wait(300);
+
     cy.get('[data-cy="abrangencia-adicionar"]').click();
     cy.get('[data-cy="abrangencia.0.estadoId"]').click();
     cy.get('[data-cy="sao-paulo"]').click();
     cy.get('[data-cy="abrangencia.0.abrangenciaMunicipio"]').click();
     cy.get('[data-cy="adamantina"]').click();
     cy.get('[data-cy="next-button"]').click();
-
+    cy.wait(300);
     //Coordenação - Dados pessoais
-    cy.get('[data-cy="criadoPor.nome"]').clear().type('TesteEC');
-    cy.get('[data-cy="criadoPor.racaCorId"]').click();
-    cy.get('[data-cy="branco-a"]').click();
-    cy.get('[data-cy="criadoPor.nomeSocial"]').clear().type('testeEC');
-    cy.get('[data-cy="criadoPor.paisId"]').click();
-    cy.get('[data-cy="brasil"]').click();
-    cy.get('[data-cy="criadoPor.dataNascimento"]').click().type('14052004');
-    cy.get('[data-cy="criadoPor.documento"]').clear().type('05242199156');
-    cy.get('[data-cy="next-button"]').click();
-
     //Coordenação - Endereço
-    cy.get('[data-cy="criadoPor.endereco.cep"]').clear().type('79000000');
-    cy.get('[data-cy="criadoPor.endereco.bairro"]').clear().type('Bairro Teste');
-    cy.get('[data-cy="criadoPor.endereco.logradouro"]').clear().type('Rua Teste Vieira');
-    cy.get('[data-cy="criadoPor.endereco.estado"]').click();
-    cy.get('[data-cy="sao-paulo"]').click();
-    cy.get('[data-cy="criadoPor.endereco.numero"]').clear();
-    cy.get('[data-cy="criadoPor.endereco.numero"]').type('12');
-    cy.get('[data-cy="criadoPor.endereco.municipio"]').click();
-    cy.get('[data-cy="adamantina"]').click();
-    cy.get('[data-cy="next-button"]').click();
-
     //Coordenação - Dados academicos
-    cy.get('[data-cy="criadoPor.instituicaoId"]').click();
-    cy.get('[data-cy="ufms-universidad"]').eq(1).click();
-    cy.get('[data-cy="criadoPor.sugerirUnidade"]').click();
-    cy.wait(300); 
-    cy.get('[data-cy="criadoPor.sugerirUnidade"]').click();
-    cy.get('[data-cy="criadoPor.unidadeId"]').click();
-    cy.get('[data-cy="facom-faculdade"]').eq(0).click();
-    cy.get('[data-cy="criadoPor.nivelAcademicoId"]').click();
-    //cy.get('[data-cy="ensino-superior"]').eq(3).click();
-
     //Area de conhecimento
-    cy.get('[data-cy="criadoPor.areaDeConhecimento-adicionar"]').click();
-    cy.get('.MuiAccordionSummary-content > :nth-child(1)').click();
-    cy.get('[data-cy="criadoPor.areaDeConhecimento.1.grandeAreaId"]').click();
-    cy.get('[data-cy="ciencias-exatas"]').click();
-    cy.get('[data-cy="criadoPor.areaDeConhecimento.1.areaId"]').click();
-    cy.get('[data-cy="ciencia-da-compu"]').click();
-    cy.get('[data-cy="criadoPor.areaDeConhecimento.1.subAreaId"]').click();
-    cy.get('[data-cy="sistemas-de-comp"]').click();
-    cy.get('[data-cy="criadoPor.areaDeConhecimento.1.especialidadeId"]').click();
-    cy.get('[data-cy="hardware"]').click();
-    cy.get('[data-cy="next-button"]').click();
+    //dados profissionais
 
-    //pula dados profissionais
+    cy.get('[data-cy="apresentacao"]').click();
+    cy.get('[data-cy="descricao"]').click();
+    cy.wait(300);
+
+    //Apresentação - Descrição
+    cy.get('[data-cy="formularioPropostaDescritiva.pergunta-1"]').type(
+      "Descrição do projeto de teste para proposta completa",
+      { delay: 0 }
+    );
+    cy.get('[data-cy="formularioPropostaDescritiva.pergunta-16"]').type(
+      "Descrição do projeto de teste para proposta completa",
+      { delay: 0 }
+    );
+    cy.get('[data-cy="formularioPropostaDescritiva.pergunta-5"]').type(
+      "Descrição do projeto de teste para proposta completa",
+      { delay: 0 }
+    );
+    cy.get('[data-cy="formularioPropostaDescritiva.pergunta-22"]').type(
+      "Descrição do projeto de teste para proposta completa",
+      { delay: 0 }
+    );
+    cy.get('[data-cy="formularioPropostaDescritiva.pergunta-8"]').type(
+      "Descrição do projeto de teste para proposta completa",
+      { delay: 0 }
+    );
+
     cy.get('[data-cy="next-button"]').click();
+    cy.wait(300);
 
     //Apresentação - indicadores de producao
-    cy.get('#mui-105').type('8'); //preenche o campo trabalho publicado em anais de eventos Qtde. Nacional
-    cy.get('#mui-123').type('2'); //preenche o campo curso de curta duração quantidade
-    cy.get('#mui-132').type('3'); //preenche o campo maquete
+    cy.get(":nth-child(1) > .e1szbxhy3 > :nth-child(1)").type("8"); //preenche o campo Artigo completo publicado, aceito ou submetido em periódicos científicos especializados com corpo editorial
+
+    cy.get(
+      ":nth-child(2) > .MuiTable-root > .MuiTableBody-root > :nth-child(4) > .e1szbxhy4 > .MuiFormControl-root"
+    ).type("2"); //preenche o campo composicao musical
+    cy.get(
+      ":nth-child(3) > .MuiTable-root > .MuiTableBody-root > :nth-child(6) > .e1szbxhy4 > .MuiFormControl-root"
+    ).type("3"); //preenche o campo maquete
     cy.get('[data-cy="next-button"]').click();
 
     //Apresentação -  Membros
     cy.get('[data-cy="nome-do-pesquisa"]').click();
-    cy.get('#search-select-multiple-option-1').click();
-    cy.get('.MuiButton-root > .MuiStack-root').click(); //botao de aceitar
+    cy.get("#search-select-multiple-option-1").click();
+    cy.get('[data-testid="AddIcon"]').click(); //botao de aceitar
     cy.get('[data-cy="nome-do-pesquisa"]').click();
-    cy.get('#search-select-multiple-option-0').click();
-    cy.get('.MuiButton-root > .MuiStack-root').click(); //botao de aceitar
-    cy.get('#mui-131').click();
-    cy.get('#mui-131-option-0').click();
-    cy.get('#mui-133').click();
-    cy.get('#mui-133-option-7').click();
+    cy.get("#search-select-multiple-option-0").click();
+    cy.get('[data-testid="AddIcon"]').click(); //botao de aceitar
+
+    cy.get('input[role="combobox"]').eq(1).click();
+    cy.contains("li", "Parceir").click();
+    cy.get('input[role="combobox"]').eq(2).click();
+    cy.wait(300);
+    cy.contains("li", "Ministrante").click();
+
+    //cy.get("#mui-239-option-0").click();
+    //cy.get("#mui-131-option-0").click();
+    //cy.get("#mui-133").click();
+    //cy.get("#mui-133-option-7").click();
     cy.get('[data-cy="next-button"]').click();
 
     //Apresentação - Atividades
     cy.get('[data-cy="propostaAtividade-adicionar"]').click();
-    cy.get('[data-cy="propostaAtividade.0.titulo"]').type('testePEC');
+    cy.get('[data-cy="propostaAtividade.0.titulo"]').type("testePEC");
     cy.get('[data-cy="propostaAtividade.0.mesInicio"]').click();
-    cy.get('#mui-225-option-0').click();
+    cy.get('[data-cy="2"]').click();
     cy.get('[data-cy="propostaAtividade.0.duracao"]').click();
-    cy.get('#mui-227-option-0').click();
+    cy.get('[data-cy="2-meses"]').click();
     cy.get('[data-cy="propostaAtividade.0.cargaHorariaSemanal"]').click();
     cy.get('[data-cy="1-hora"]').click();
     cy.get('[data-cy="propostaAtividade.0.membroResponsavelId"]').click();
-    cy.get('#mui-231-option-0').click();
     cy.get('[data-cy="next-button"]').click();
-    
+
+    //orcamento
+    cy.get('[data-cy="orcamento"]').click();
+    cy.get('[data-cy="faixaFinanciamentoId"]').click();
+    cy.get('[data-cy="faixa-de-financiamento"]').click();
+    cy.get('[data-cy="faixa-3-r-505-01"]').click();
+
     //Termos
     cy.get('[data-cy="termoDeAceiteAceito"]').click();
-    cy.get('.ex40wuf1').click();
-
-  }); 
+    cy.get(".ex40wuf1").click();
+  });
 });
