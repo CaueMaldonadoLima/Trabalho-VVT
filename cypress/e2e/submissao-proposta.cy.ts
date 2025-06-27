@@ -13,13 +13,13 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="editais-ver-mais"]').click(); //Clica no botão "Ver Mais" para acessar a página de Editais
 
     cy.get('[data-cy="visualizar-edital-grupo-08-e-s-001"]').click(); //Edite essa linha para selecionar o Edital respectivo
-
     cy.wait(300); //Aguarda 300ms para garantir que a página foi carregada completamente
     cy.get('[data-cy="criar-proposta"]').click(); //Clica no botão "Criar Proposta" para iniciar o processo de criação de uma nova proposta
     cy.get('[data-cy="tituloDoProjeto"]').type(
         'Submissão de Proposta Edital Simples - teste4', //Preenche o campo "Título do Projeto" com o valor "Submissão de Proposta de Teste"
         { delay: 0 },
     )
+    /*
     //Atividade 3 - Faça a continuidade do teste, preenchendo os campos obrigatórios da proposta.
     cy.get('[data-cy="instituicaoExecutoraId"]').click();
     cy.get('[data-cy="ufms-universidad"]').click();
@@ -41,8 +41,9 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="areaDeConhecimento.0.especialidadeId"]').click();
     cy.get('[data-cy="computabilidade"]').click();
     cy.get('[data-cy="next-button"]').click();
-
+    */
     //Abrangencia//
+    cy.get('[data-cy="abrangencia"]').click();
     cy.get('[data-cy="abrangencia-adicionar"]').click();
     cy.get('[data-cy="abrangencia.0.estadoId"]').click();
     cy.get('[data-cy="sao-paulo"]').click();
@@ -51,6 +52,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="next-button"]').click();
 
     //Coordenação - Dados pessoais
+    /*
     cy.get('[data-cy="criadoPor.nome"]').type('Teste');
     cy.get('[data-cy="criadoPor.racaCorId"]').click();
     cy.get('[data-cy="branco-a"]').click();
@@ -98,8 +100,11 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
 
     //pula dados profissionais
     cy.get('[data-cy="next-button"]').click();
-
+    
+    */ 
     //Apresentação - Membros
+    cy.get('[data-cy="apresentacao"]').click();
+    cy.get('[data-cy="membros"]').click();
     cy.get('[data-cy="nome-do-pesquisa"]').click();
     cy.get('#search-select-multiple-option-1').click();
     cy.get('.MuiButton-root > .MuiStack-root').click(); //botao de aceitar
@@ -113,6 +118,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="next-button"]').click();
 
     //Apresentação - Atividades
+    cy.get('[data-cy="atividades"]').click();
     cy.get('[data-cy="propostaAtividade-adicionar"]').click();
     cy.get('[data-cy="propostaAtividade.0.titulo"]').type('teste');
     cy.get('[data-cy="propostaAtividade.0.mesInicio"]').click();

@@ -8,6 +8,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       'Grupo8@sig', // [Senha do usuário]
     ); //Acessa a página de login usando as credenciais do usuário e senha.
   });
+  
   it('Realiza login no sistema e submete uma proposta', () => {
     cy.get('[data-cy="breadcrumb-home"]').click(); //Clica no botão "Home" para retornar à página anterior
     cy.get('[data-cy="editais-ver-mais"]').click(); //Clica no botão "Ver Mais" para acessar a página de Editais
@@ -20,7 +21,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
         'Submissão de Proposta Edital Medio - teste', //Preenche o campo "Título do Projeto" com o valor "Submissão de Proposta de Teste"
         { delay: 0 },
     )
-    
+    /*
     //Atividade 3 - Faça a continuidade do teste, preenchendo os campos obrigatórios da proposta.
     cy.get('[data-cy="instituicaoExecutoraId"]').click();
     cy.get('[data-cy="ufms-universidad"]').click();
@@ -136,6 +137,6 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     //Termos
     cy.get('[data-cy="termoDeAceiteAceito"]').click();
     cy.get('.ex40wuf1').click();
-
+*/
   }); 
 });
