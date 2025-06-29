@@ -10,6 +10,8 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
   });
   it("Realiza login no sistema e submete uma proposta", () => {
     cy.get('[data-cy="breadcrumb-home"]').click(); //Clica no botão "Home" para retornar à página anterior
+    cy.wait(300);
+
     cy.get('[data-cy="editais-ver-mais"]').click(); //Clica no botão "Ver Mais" para acessar a página de Editais
 
     cy.get('[data-cy="visualizar-edital-grupo-08-e-c-003"]').eq(0).click(); //Edite essa linha para selecionar o Edital respectivo
@@ -45,6 +47,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
 
     //Abrangencia//
     cy.get('[data-cy="abrangencia"]').click();
+
     cy.wait(300);
 
     cy.get('[data-cy="abrangencia-adicionar"]').click();
@@ -54,6 +57,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="adamantina"]').click();
     cy.get('[data-cy="next-button"]').click();
     cy.wait(300);
+
     //Coordenação - Dados pessoais
     //Coordenação - Endereço
     //Coordenação - Dados academicos
@@ -108,18 +112,15 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get("#search-select-multiple-option-0").click();
     cy.get('[data-testid="AddIcon"]').click(); //botao de aceitar
 
-    cy.get('input[role="combobox"]').eq(1).click();
+    cy.get('input[role="combobox"]').eq(1).click(); // select da função do membro
     cy.wait(300);
-    cy.contains("li", "Parceir").click();
-    cy.get('input[role="combobox"]').eq(2).click();
+    cy.contains("li", "Parceir").click(); // busca a opção Parceiro e clica nela
+    cy.get('input[role="combobox"]').eq(2).click(); // select da função do membro
     cy.wait(300);
-    cy.contains("li", "Ministrante").click();
+    cy.contains("li", "Ministrante").click(); // busca a opção Ministrante e clica nela
 
-    //cy.get("#mui-239-option-0").click();
-    //cy.get("#mui-131-option-0").click();
-    //cy.get("#mui-133").click();
-    //cy.get("#mui-133-option-7").click();
     cy.get('[data-cy="next-button"]').click();
+    cy.wait(300);
 
     //Apresentação - Atividades
     cy.get('[data-cy="propostaAtividade-adicionar"]').click();
