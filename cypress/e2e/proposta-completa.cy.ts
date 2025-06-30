@@ -124,14 +124,20 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
 
     //Apresentação - Atividades
     cy.get('[data-cy="propostaAtividade-adicionar"]').click();
-    cy.get('[data-cy="propostaAtividade.0.titulo"]').type("testePEC");
-    cy.get('[data-cy="propostaAtividade.0.mesInicio"]').click();
-    cy.get('[data-cy="2"]').click();
-    cy.get('[data-cy="propostaAtividade.0.duracao"]').click();
-    cy.get('[data-cy="2-meses"]').click();
+    cy.get('[data-cy="propostaAtividade.0.titulo"]').type(
+      "Teste de Proposta Edital Medio",
+      { delay: 0 }
+    );
+    cy.get('[data-cy="propostaAtividade.0.mesInicio"]').click(); //clica no campo de mês de início
+    cy.get('ul[role="listbox"] li')
+      .contains("2°") // Encontra o item que contém o texto
+      .click();
+    cy.get('[data-cy="propostaAtividade.0.duracao"]').click(); //clica no campo de duração
+    cy.get('ul[role="listbox"] li').contains("4 meses").click();
     cy.get('[data-cy="propostaAtividade.0.cargaHorariaSemanal"]').click();
-    cy.get('[data-cy="1-hora"]').click();
-    cy.get('[data-cy="propostaAtividade.0.membroResponsavelId"]').click();
+    cy.get('ul[role="listbox"] li').contains("15 horas").click();
+    cy.get('[data-cy="propostaAtividade.0.membroRespondavelId"]').click();
+    cy.get('ul[role="listbox"] li').contains("Grupo 8").click();
     cy.get('[data-cy="next-button"]').click();
 
     //orcamento
