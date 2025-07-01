@@ -6,8 +6,8 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     // executa antes de realizar cada teste(it)
     cy.typelogin(
       "https://novo-sig.ledes.net", // [URL do sistema]
-      "grupo8_pesq@sig.com", // [E-mail do usuário]
-      "Grupo8@sig" // [Senha do usuário]
+      "grupo15_pesq@sig.com", // [E-mail do usuário]
+      "Grupo15@sig" // [Senha do usuário]
     ); //Acessa a página de login usando as credenciais do usuário e senha.
   });
   it("Realiza login no sistema e submete uma proposta", () => {
@@ -16,7 +16,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
 
     cy.get('[data-cy="editais-ver-mais"]').click(); //Clica no botão "Ver Mais" para acessar a página de Editais
 
-    cy.get('[data-cy="visualizar-edital-grupo-08-e-s-007"]').click(); //Edite essa linha para selecionar o Edital respectivo
+    cy.get('[data-cy="visualizar-edital-grupo-08-e-m-002"]').click(); //Edite essa linha para selecionar o Edital respectivo
 
     cy.wait(300); //Aguarda 300ms para garantir que a página foi carregada completamente
     cy.get('[data-cy="criar-proposta"]').click(); //Clica no botão "Criar Proposta" para iniciar o processo de criação de uma nova proposta
@@ -32,10 +32,14 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.wait(300);
     cy.get('[data-cy="abrangencia-adicionar"]').click();
     cy.get('[data-cy="abrangencia.0.estadoId"]').click();
-    cy.get('[data-cy="sao-paulo"]').click();
+    cy.get('[data-cy="goias"]').click();
     cy.get('[data-cy="abrangencia.0.abrangenciaMunicipio"]').click();
-    cy.get('[data-cy="adamantina"]').click();
+    cy.get('[data-cy="abadia-de-goias"]').click();
     cy.get('[data-cy="next-button"]').click();
+    cy.wait(300);
+
+    cy.get('[data-cy="apresentacao"]').click();
+    cy.get('[data-cy="indicadores-de-producao"]').click();
     cy.wait(300);
 
     //Apresentação - indicadores de producao
@@ -52,17 +56,23 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     //Apresentação -  Membros
     cy.get('[data-cy="nome-do-pesquisa"]').click();
     cy.get("#search-select-multiple-option-1").click();
-    cy.get(".MuiButton-root > .MuiStack-root").click(); //botao de aceitar
+    cy.get('[data-testid="AddIcon"]').click(); //botao de aceitar
+    cy.get('input[role="combobox"]').eq(1).click(); // select da função do membro
+    cy.contains("li", "Parceir").click(); // busca a opção Parceiro e clica nela
+    cy.wait(300);
     cy.get('[data-cy="nome-do-pesquisa"]').click();
     cy.get("#search-select-multiple-option-0").click();
-    cy.get(".MuiButton-root > .MuiStack-root").click(); //botao de aceitar
-    cy.get("#mui-131").click();
-    cy.get("#mui-131-option-0").click();
-    cy.get("#mui-133").click();
-    cy.get("#mui-133-option-7").click();
+    cy.get('[data-testid="AddIcon"]').click(); //botao de aceitar
+
+    cy.get('input[role="combobox"]').eq(2).click(); // select da função do membro
+    cy.contains("li", "Ministr").click(); // busca a opção Ministrante e clica nela
+    cy.wait(300);
+
     cy.get('[data-cy="next-button"]').click();
+    cy.wait(300);
 
     //Apresentação - Atividades
+    /*
     cy.get('[data-cy="propostaAtividade-adicionar"]').click();
     cy.get('[data-cy="propostaAtividade.0.titulo"]').type(
       "Teste de Proposta Edital Medio",
@@ -77,8 +87,11 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="propostaAtividade.0.membroRespondavelId"]').click(); //responsavel
     cy.get('ul[role="listbox"] li').contains("Grupo 8").click();
     cy.get('[data-cy="next-button"]').click();
+*/
 
     //Termos
+    cy.get('[data-cy="termos"]').click();
+    cy.get('[data-cy="termo-de-aceite"]').click();
     cy.get('[data-cy="termoDeAceiteAceito"]').click();
     cy.get(".ex40wuf1").click();
   });
