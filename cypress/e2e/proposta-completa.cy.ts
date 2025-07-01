@@ -4,8 +4,8 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     // executa antes de realizar cada teste(it)
     cy.typelogin(
       "https://novo-sig.ledes.net", // [URL do sistema]
-      "grupo8_pesq@sig.com", // [E-mail do usuário]
-      "Grupo8@sig" // [Senha do usuário]
+      "grupo15_pesq@sig.com", // [E-mail do usuário]
+      "Grupo15@sig" // [Senha do usuário]
     ); //Acessa a página de login usando as credenciais do usuário e senha.
   });
   it("Realiza login no sistema e submete uma proposta", () => {
@@ -108,16 +108,16 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="nome-do-pesquisa"]').click();
     cy.get("#search-select-multiple-option-1").click();
     cy.get('[data-testid="AddIcon"]').click(); //botao de aceitar
+    cy.get('input[role="combobox"]').eq(1).click(); // select da função do membro
+    cy.contains("li", "Parceir").click(); // busca a opção Parceiro e clica nela
+    cy.wait(300);
     cy.get('[data-cy="nome-do-pesquisa"]').click();
     cy.get("#search-select-multiple-option-0").click();
     cy.get('[data-testid="AddIcon"]').click(); //botao de aceitar
 
-    cy.get('input[role="combobox"]').eq(1).click(); // select da função do membro
-    cy.wait(300);
-    cy.contains("li", "Parceir").click(); // busca a opção Parceiro e clica nela
     cy.get('input[role="combobox"]').eq(2).click(); // select da função do membro
-    cy.wait(300);
     cy.contains("li", "Ministrante").click(); // busca a opção Ministrante e clica nela
+    cy.wait(300);
 
     cy.get('[data-cy="next-button"]').click();
     cy.wait(300);
@@ -136,17 +136,33 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('ul[role="listbox"] li').contains("4 meses").click();
     cy.get('[data-cy="propostaAtividade.0.cargaHorariaSemanal"]').click();
     cy.get('ul[role="listbox"] li').contains("15 horas").click();
-    cy.get('[data-cy="propostaAtividade.0.membroRespondavelId"]').click();
-    cy.get('ul[role="listbox"] li').contains("Grupo 8").click();
+    cy.get('input[role="combobox"]').eq(3).click();
+    cy.get('ul[role="listbox"] li').contains("Grupo 15").click();
     cy.get('[data-cy="next-button"]').click();
 
     //orcamento
     cy.get('[data-cy="orcamento"]').click();
+    cy.get('[data-cy="faixa-de-financiamento"]').click(); //Clica no campo de faixa de financiamento
     cy.get('[data-cy="faixaFinanciamentoId"]').click();
-    cy.get('[data-cy="faixa-de-financiamento"]').click();
     cy.get('[data-cy="faixa-3-r-505-01"]').click();
+    cy.get('[data-cy="material-de-consumo"]').click();
+    cy.wait(300);
+    cy.get('[data-cy="add-button"]').click();
+    cy.get('[data-cy="rubricaMaterialConsumoUnsaved.especificacao"]').type(
+      "Eletronicos"
+    );
+    cy.get('[data-cy="rubricaMaterialConsumoUnsaved.unidadeMedida"]').click();
+    cy.get('[data-cy="outros"]').click();
+    cy.get('[data-cy="rubricaMaterialConsumoUnsaved.quantidade"]').type("4"); //Clica no campo de material de consumo e preenche com o valor 1000
+    cy.get('[data-cy="rubricaMaterialConsumoUnsaved.custoUnitario"]').type(
+      "17500"
+    ); //Clica no campo de custo unitário e preenche com o valor 1000
+    cy.get('[data-cy="rubricaMaterialConsumoUnsaved.mesPrevisto"]').click();
+    cy.contains("li", "1°").click(); //Clica no campo de mês previsto e seleciona o mês de janeiro
 
     //Termos
+    cy.get('[data-cy="termos"]').click();
+    cy.get('[data-cy="termo-de-aceite"]').click();
     cy.get('[data-cy="termoDeAceiteAceito"]').click();
     cy.get(".ex40wuf1").click();
   });
